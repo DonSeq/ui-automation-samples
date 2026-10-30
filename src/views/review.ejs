@@ -5,17 +5,17 @@
   </ol>
   <section class="card" id="review-card" data-testid="review-card">
     <h1 id="review-title" data-testid="review-title">Review</h1>
-    <table class="review-table" id="review-table" data-testid="review-table">
+    <table class="review-table">
       <thead><tr><th scope="col">Setting</th><th scope="col">Value</th></tr></thead>
       <tbody>
-        <tr id="review-row-runName" data-testid="review-row-runName"><th scope="row">Run Name</th><td id="review-runName" data-testid="review-runName"><%= setup.runName %></td></tr>
-        <tr id="review-row-readType" data-testid="review-row-readType"><th scope="row">Read Type</th><td id="review-readType" data-testid="review-readType"><%= setup.readType %></td></tr>
-        <tr id="review-row-readLength" data-testid="review-row-readLength"><th scope="row">Read Length (bp)</th><td id="review-readLength" data-testid="review-readLength"><%= setup.readLength %></td></tr>
-        <tr id="review-row-analysis" data-testid="review-row-analysis"><th scope="row">Secondary Analysis</th><td id="review-analysis" data-testid="review-analysis"><%= setup.analysis %></td></tr>
+        <tr class="review-row"><th scope="row" class="review-label">Run Name</th><td class="review-value run-name-value"><%= setup.runName %></td></tr>
+        <tr class="review-row"><th scope="row" class="review-label">Read Type</th><td class="review-value"><%= setup.readType %></td></tr>
+        <tr class="review-row"><th scope="row" class="review-label">Read Length (bp)</th><td class="review-value"><%= setup.readLength %></td></tr>
+        <tr class="review-row"><th scope="row" class="review-label">Secondary Analysis</th><td class="review-value analysis-value"><%= setup.analysis %></td></tr>
       </tbody>
     </table>
     <div class="actions">
-      <a href="/setup" class="btn btn-secondary" role="button" id="back-button" data-testid="back-button">Back</a>
+      <a href="/setup" class="btn btn-secondary" role="button">Back</a>
       <button type="button" class="btn btn-primary" id="confirm-button" data-testid="confirm-button">Confirm</button>
     </div>
   </section>
@@ -23,7 +23,7 @@
 
 <dialog id="run-started-dialog" class="modal" aria-labelledby="run-started-title" data-testid="run-started-dialog">
   <h2 id="run-started-title" data-testid="run-started-title">Run Started</h2>
-  <p class="muted" id="run-started-message" data-testid="run-started-message">Your run has been started successfully.</p>
+  <p class="muted">Your run has been started successfully.</p>
   <button type="button" class="btn btn-primary" id="run-started-close" data-testid="run-started-close">Close</button>
 </dialog>
 <script>

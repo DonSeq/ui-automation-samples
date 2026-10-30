@@ -14,7 +14,7 @@ Flow: **Login → Home (Welcome, `<user>` + Start) → Run Setup (Run Name + rad
 - Back from Review returns to Setup with values preserved.
 - Confirm on Review opens a "Run Started" popup (`<dialog>`); closing it returns to Home and clears the saved setup.
 - `/home`, `/setup`, `/review` redirect to `/login` when signed out; `/review` redirects to `/setup` if nothing was submitted.
-- Every interactive element and result has a `data-testid` (e.g. `username-input`, `start-button`, `run-name-error`, `review-table`).
+- Most elements have an `id` equal to their `data-testid` (e.g. `username-input`, `start-button`, `run-name-error`).
 
 ```bash
 npm install
@@ -24,7 +24,7 @@ npm run dev            # http://localhost:3000   (or: npm run build && npm start
 ## Tests (`test/`)
 
 The suites are **skeletons for a candidate to complete**: stubbed page objects plus skipped tests with `TODO` steps.
-See `test/README.md` for the exercise, route/selector cheat sheet and which file to edit per stack.
+See `test/README.md` for the exercise, the routes and rules, and which file to edit per stack.
 
 | Stack                | Folder             | Run                                                       |
 | -------------------- | ------------------ | --------------------------------------------------------- |
