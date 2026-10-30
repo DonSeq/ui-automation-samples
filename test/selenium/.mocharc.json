@@ -1,0 +1,6 @@
+{
+  "require": ["tsx/cjs", "test/selenium/support/hooks.ts"],
+  "spec": ["test/selenium/specs/**/*.spec.ts"],
+  "timeout": 30000,
+  "reporter": "spec"
+}

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Run Setup form</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="frame">
+<div id="frame-content" class="frame-content">
+  <form method="post" action="/setup" id="setup-form" novalidate>
+    <label for="run-name-input">Run Name</label>
+    <input id="run-name-input" name="runName" type="text" maxlength="60" value="<%= values.runName %>"
+           class="<%= errors.runName ? 'invalid' : '' %>" data-testid="run-name-input" aria-describedby="run-name-error">
+    <p class="field-error" id="run-name-error" data-testid="run-name-error" role="alert"><%= errors.runName || '' %></p>
+
+    <fieldset id="read-type-group" data-testid="read-type-group">
+      <legend>Read Type</legend>
+      <% options.READ_TYPES.forEach(function (v) { var id = 'readType-' + v.toLowerCase().replace(/\s+/g, '-'); %>
+        <label class="radio" for="<%= id %>">
+          <input type="radio" id="<%= id %>" name="readType" value="<%= v %>" <%= values.readType === v ? 'checked' : '' %> data-testid="<%= id %>"> <%= v %>
+        </label>
+      <% }); %>
+      <p class="field-error" id="read-type-error" data-testid="read-type-error" role="alert"><%= errors.readType || '' %></p>
+    </fieldset>
+
+    <fieldset id="read-length-group" data-testid="read-length-group">
+      <legend>Read Length (bp)</legend>
+      <% options.READ_LENGTHS.forEach(function (v) { var id = 'readLength-' + v; %>
+        <label class="radio" for="<%= id %>">
+          <input type="radio" id="<%= id %>" name="readLength" value="<%= v %>" <%= values.readLength === v ? 'checked' : '' %> data-testid="<%= id %>"> <%= v %>
+        </label>
+      <% }); %>
+      <p class="field-error" id="read-length-error" data-testid="read-length-error" role="alert"><%= errors.readLength || '' %></p>
+    </fieldset>
+
+    <fieldset id="analysis-group" data-testid="analysis-group">
+      <legend>Secondary Analysis</legend>
+      <% options.ANALYSIS_MODES.forEach(function (v) { var id = 'analysis-' + v.toLowerCase(); %>
+        <label class="radio" for="<%= id %>">
+          <input type="radio" id="<%= id %>" name="analysis" value="<%= v %>" <%= values.analysis === v ? 'checked' : '' %> data-testid="<%= id %>"> <%= v %>
+        </label>
+      <% }); %>
+      <p class="field-error" id="analysis-error" data-testid="analysis-error" role="alert"><%= errors.analysis || '' %></p>
+    </fieldset>
+
+    <div class="actions">
+      <!-- target="_top": this page lives in an iframe, but Back must navigate the whole window. -->
+      <a href="/home" target="_top" class="btn btn-secondary" role="button" id="back-button" data-testid="back-button">Back</a>
+      <button type="submit" class="btn btn-primary" id="forward-button" data-testid="forward-button">Forward</button>
+    </div>
+  </form>
+</div>
+<script>
+  var form = document.getElementById('setup-form');
+  // field name -> { input/error element ids, message }
+  var fields = {
+    runName:    { errorId: 'run-name-error',    message: 'Run Name is required.' },
+    readType:   { errorId: 'read-type-error',   message: 'Select a read type.' },
+    readLength: { errorId: 'read-length-error', message: 'Select a read length.' },
+    analysis:   { errorId: 'analysis-error',    message: 'Select an analysis mode.' }
+  };
+
+  // Keep the iframe exactly as tall as its content.
+  function resizeFrame() {
+    if (window.frameElement) {
+      window.frameElement.style.height = document.getElementById('frame-content').offsetHeight + 'px';
+    }
+  }
+  window.addEventListener('load', resizeFrame);
+
+  // Client-side validation mirrors the server rules for "empty" so both error paths are testable.
+  form.addEventListener('submit', function (e) {
+    var runNameInput = document.getElementById('run-name-input');
+    var missing = [];
+    if (!runNameInput.value.trim()) missing.push('runName');
+    ['readType', 'readLength', 'analysis'].forEach(function (name) {
+      if (!form.querySelector('input[name="' + name + '"]:checked')) missing.push(name);
+    });
+    if (!missing.length) return;
+
+    e.preventDefault();
+    Object.keys(fields).forEach(function (name) {
+      document.getElementById(fields[name].errorId).textContent =
+        missing.indexOf(name) >= 0 ? fields[name].message : '';
+    });
+    runNameInput.classList.toggle('invalid', missing.indexOf('runName') >= 0);
+    if (missing.indexOf('runName') >= 0) runNameInput.focus();
+    resizeFrame();
+  });
+</script>
+</body>
+</html>

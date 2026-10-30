@@ -1,0 +1,9 @@
+<%- include('partials-head', { title: 'Home' }) %>
+<main class="container narrow">
+  <section class="card center" id="home-card" data-testid="home-card">
+    <h1 id="welcome-heading" data-testid="welcome-heading">Welcome, <span id="welcome-username" data-testid="welcome-username"><%= username %></span></h1>
+    <p class="muted">Ready to configure a new sequencing run?</p>
+    <a href="/setup" class="btn btn-primary btn-lg" role="button" id="start-button" data-testid="start-button">Start</a>
+  </section>
+</main>
+<%- include('partials-footer') %>

@@ -1,0 +1,209 @@
+/* Illumina-inspired palette: deep navy, teal and warm orange accents. No brand assets used. */
+:root {
+  --navy: #0b1f3a;
+  --navy-soft: #1a3358;
+  --teal: #00a3ad;
+  --teal-soft: #e0f5f6;
+  --orange: #f26a21;
+  --orange-dark: #d9560f;
+  --bg: #f5f7fb;
+  --surface: #ffffff;
+  --text: #16243a;
+  --muted: #64748b;
+  --border: #e2e8f0;
+  --danger: #dc2626;
+  --danger-soft: #fef2f2;
+  --radius: 14px;
+  --shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 12px 32px -8px rgba(15, 23, 42, 0.12);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--text);
+  background:
+    radial-gradient(900px 400px at 85% -10%, rgba(0, 163, 173, 0.14), transparent 60%),
+    radial-gradient(700px 360px at -5% 0%, rgba(242, 106, 33, 0.10), transparent 55%),
+    var(--bg);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- Header ---------- */
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.brand { display: flex; align-items: center; gap: 0.65rem; }
+.brand-mark {
+  width: 26px; height: 26px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--teal), var(--orange));
+}
+.brand-name { font-size: 1.1rem; font-weight: 700; letter-spacing: -0.01em; color: var(--navy); }
+.logout-form { display: flex; align-items: center; gap: 0.5rem; margin: 0; }
+.signed-in {
+  padding: 0.25rem 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--navy-soft);
+  background: var(--teal-soft);
+  border-radius: 999px;
+}
+
+/* ---------- Layout & card ---------- */
+.container { width: 100%; max-width: 720px; margin: 3rem auto; padding: 0 1.25rem; flex: 1; }
+.container.narrow { max-width: 440px; }
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2.25rem;
+  box-shadow: var(--shadow);
+}
+.card.center { text-align: center; padding: 3rem 2.25rem; }
+h1 { margin: 0 0 0.5rem; font-size: 1.75rem; font-weight: 700; letter-spacing: -0.02em; color: var(--navy); }
+.muted { margin: 0 0 1rem; color: var(--muted); }
+code { padding: 0.15rem 0.45rem; font-size: 0.85em; background: #eef2f7; border-radius: 6px; }
+
+/* ---------- Forms ---------- */
+label { display: block; margin: 1.25rem 0 0.4rem; font-size: 0.875rem; font-weight: 600; color: var(--navy-soft); }
+input[type="text"], input[type="password"] {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  font: inherit;
+  color: var(--text);
+  background: #fff;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+input[type="text"]:hover, input[type="password"]:hover { border-color: #94a3b8; }
+input:focus { outline: none; border-color: var(--teal); box-shadow: 0 0 0 4px rgba(0, 163, 173, 0.18); }
+input.invalid { border-color: var(--danger); box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.10); }
+.field-error { min-height: 1.3rem; margin: 0.35rem 0 0; font-size: 0.85rem; color: var(--danger); }
+
+fieldset { margin: 1.25rem 0 0; padding: 0; border: 0; min-width: 0; }
+legend { padding: 0; margin-bottom: 0.5rem; font-size: 0.875rem; font-weight: 600; color: var(--navy-soft); }
+
+/* Radios render as selectable option cards; the native input stays in place for accessibility and automation. */
+label.radio {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0.5rem 0.5rem 0;
+  padding: 0.6rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text);
+  background: #fff;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+}
+label.radio:hover { border-color: var(--teal); }
+label.radio:has(input:checked) {
+  background: var(--teal-soft);
+  border-color: var(--teal);
+  box-shadow: inset 0 0 0 1px var(--teal);
+}
+label.radio:has(input:focus-visible) { box-shadow: 0 0 0 4px rgba(0, 163, 173, 0.25); }
+input[type="radio"] { margin: 0; width: 1.05rem; height: 1.05rem; accent-color: var(--teal); }
+
+.alert { margin: 1rem 0 0; padding: 0.75rem 1rem; font-size: 0.9rem; border-radius: 10px; }
+.alert-error { color: var(--danger); background: var(--danger-soft); border: 1px solid #fecaca; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 1.5rem;
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.1s, background 0.15s, box-shadow 0.15s, border-color 0.15s;
+}
+.btn:active { transform: translateY(1px); }
+.btn:focus-visible { outline: none; box-shadow: 0 0 0 4px rgba(0, 163, 173, 0.3); }
+.btn-primary { color: #fff; background: var(--orange); box-shadow: 0 6px 16px -6px rgba(242, 106, 33, 0.6); }
+.btn-primary:hover { background: var(--orange-dark); }
+.btn-secondary { color: var(--navy); background: #fff; border-color: #cbd5e1; }
+.btn-secondary:hover { background: #f1f5f9; border-color: #94a3b8; }
+.btn-link { padding: 0.3rem 0.6rem; font-size: 0.875rem; color: var(--muted); background: none; }
+.btn-link:hover { color: var(--navy); background: #eef2f7; }
+.btn-lg { margin-top: 1rem; padding: 0.95rem 3.5rem; font-size: 1.1rem; }
+form > .btn-primary { width: 100%; margin-top: 1.75rem; }
+
+.actions { display: flex; justify-content: space-between; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+.actions .btn-primary { width: auto; margin-top: 0; }
+
+/* ---------- Progress steps ---------- */
+.steps { display: flex; gap: 0.5rem; margin: 0 0 1.25rem; padding: 0; list-style: none; font-size: 0.8rem; font-weight: 600; }
+.steps li { padding: 0.35rem 0.95rem; color: var(--muted); background: #e8edf4; border-radius: 999px; }
+.steps li.done { color: #0b6b72; background: var(--teal-soft); }
+.steps li.current { color: #fff; background: var(--navy); }
+
+/* ---------- Review table ---------- */
+.review-table {
+  width: 100%;
+  margin-top: 1.25rem;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.review-table th, .review-table td { padding: 0.85rem 1.1rem; text-align: left; border-bottom: 1px solid var(--border); }
+.review-table tbody tr:last-child th, .review-table tbody tr:last-child td { border-bottom: 0; }
+.review-table thead th { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); background: #f8fafc; }
+.review-table tbody th { width: 40%; font-weight: 500; color: var(--muted); }
+.review-table tbody td { font-weight: 600; color: var(--navy); }
+
+/* ---------- Setup form iframe ---------- */
+.setup-frame { display: block; width: calc(100% + 12px); margin: 0 -6px; height: 640px; border: 0; }
+body.frame { min-height: 0; display: block; background: transparent; }
+.frame-content { padding: 6px; }
+.frame fieldset .field-error { min-height: 0; margin: 0; }
+.frame .actions { margin-top: 1.5rem; }
+
+/* ---------- Modal ---------- */
+.modal {
+  width: min(360px, calc(100vw - 2rem));
+  padding: 2rem;
+  text-align: center;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 24px 64px -12px rgba(15, 23, 42, 0.35);
+}
+.modal::backdrop { background: rgba(11, 31, 58, 0.45); backdrop-filter: blur(2px); }
+.modal h2 { margin: 0 0 0.5rem; font-size: 1.4rem; letter-spacing: -0.01em; color: var(--navy); }
+.modal .btn { margin-top: 0.5rem; min-width: 8rem; }
+
+.site-footer { padding: 1.5rem; text-align: center; font-size: 0.8rem; color: var(--muted); }
+
+@media (max-width: 520px) {
+  .site-header { padding: 0.8rem 1rem; }
+  .card, .card.center { padding: 1.5rem; }
+  .container { margin: 1.5rem auto; }
+}

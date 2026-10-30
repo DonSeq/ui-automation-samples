@@ -1,0 +1,18 @@
+<%- include('partials-head', { title: 'Sign in' }) %>
+<main class="container narrow">
+  <section class="card" id="login-card" data-testid="login-card">
+    <h1 id="login-title" data-testid="login-title">Sign in</h1>
+    <p class="muted">Use any username with the demo password <code id="demo-password" data-testid="demo-password"><%= demoPassword %></code>.</p>
+    <% if (error) { %>
+      <div class="alert alert-error" role="alert" id="login-error" data-testid="login-error"><%= error %></div>
+    <% } %>
+    <form method="post" action="/login" id="login-form" novalidate>
+      <label for="username-input">Username</label>
+      <input id="username-input" name="username" type="text" autocomplete="username" value="<%= enteredUsername %>" data-testid="username-input">
+      <label for="password-input">Password</label>
+      <input id="password-input" name="password" type="password" autocomplete="current-password" data-testid="password-input">
+      <button type="submit" class="btn btn-primary" id="login-button" data-testid="login-button">Sign in</button>
+    </form>
+  </section>
+</main>
+<%- include('partials-footer') %>

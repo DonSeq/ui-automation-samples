@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= title %> | Run Planner</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<header class="site-header" id="site-header">
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-name" id="brand" data-testid="brand">Run Planner</span>
+  </div>
+  <% if (locals.username) { %>
+    <form method="post" action="/logout" class="logout-form" id="logout-form">
+      <span class="signed-in" id="signed-in-user" data-testid="signed-in-user"><%= username %></span>
+      <button type="submit" class="btn btn-link" id="logout-button" data-testid="logout-button">Sign out</button>
+    </form>
+  <% } %>
+</header>

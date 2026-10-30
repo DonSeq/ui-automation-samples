@@ -1,0 +1,11 @@
+<%- include('partials-head', { title: 'Run Setup' }) %>
+<main class="container">
+  <ol class="steps" aria-label="Progress">
+    <li class="done">Home</li><li class="current" aria-current="step">Run Setup</li><li>Review</li>
+  </ol>
+  <section class="card" id="setup-card" data-testid="setup-card">
+    <h1 id="setup-title" data-testid="setup-title">Run Setup</h1>
+    <iframe id="setup-frame" class="setup-frame" src="/setup/form" title="Run setup form" data-testid="setup-frame"></iframe>
+  </section>
+</main>
+<%- include('partials-footer') %>
